@@ -3,6 +3,7 @@ package ru.gubernik.fileservice.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.gubernik.fileservice.model.File;
+import ru.gubernik.fileservice.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -64,5 +65,19 @@ public class FileDaoImpl implements FileDao {
         TypedQuery<File> query = entityManager.createQuery(criteriaQuery);
 
         return query.getSingleResult();
+    }
+
+    @Override
+    public List<File> findUserFiles(User user) {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<File> criteriaQuery = criteriaBuilder.createQuery(File.class);
+        Root root = criteriaQuery.from(File.class);
+
+        criteriaQuery.where(criteriaBuilder.equal(root.get("user"), user));
+
+        TypedQuery<File> query = entityManager.createQuery(criteriaQuery);
+
+        return query.getResultList();
     }
 }

@@ -64,4 +64,10 @@ public class FileServiceImpl implements FileService {
     public File getByFileName(String fileName) {
         return fileDao.findByFileName(fileName);
     }
+
+    @Override
+    public List<File> getUserFilesList(String userName) {
+        User user = userDao.getUserByName(userName);
+        return fileDao.findUserFiles(user);
+    }
 }

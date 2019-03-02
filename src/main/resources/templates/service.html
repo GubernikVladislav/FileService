@@ -4,7 +4,7 @@
     <title>File Service</title>
 </head>
 <body>
-<div>
+<div th:if="${role == 'ADMIN'}">
 <a th:href="@{/userlist}">Список пользователей</a>
 </div>
     Список файлов
@@ -19,13 +19,16 @@
     </form>
     <p th:text="${message}">Text</p>
 </div>
-<div>
+    <div th:if="${userName == pageOwner} OR ${role == 'ADMIN'}">
     <table>
         <tr th:each = "file: ${files}">
             <td th:text="${file.fileName}">fileName</td>
             <td><a th:href="@{/download/} + ${file.fileName}">Скачать</a></td>
         </tr>
     </table>
-</div>
+    </div>
+    <div th:unless="${userName == pageOwner} OR ${role == 'ADMIN'}">
+        Доступ запрещен
+    </div>
 </body>
 </html>

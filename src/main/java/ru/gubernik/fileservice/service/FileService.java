@@ -31,4 +31,11 @@ public interface FileService {
      * @return - файл
      */
     File getByFileName(String fileName);
+
+    /**
+     * Получение списка файлов пользователя
+     * @param userName - имя пользователя
+     * @return список файлов
+     */
+    List<File> getUserFilesList(String userName);
 }

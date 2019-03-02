@@ -1,6 +1,7 @@
 package ru.gubernik.fileservice.dao;
 
 import ru.gubernik.fileservice.model.File;
+import ru.gubernik.fileservice.model.User;
 
 import java.util.List;
 
@@ -27,4 +28,11 @@ public interface FileDao {
      * @return файл
      */
     File findByFileName(String fileName);
+
+    /**
+     * Получение списка файлов пользователя
+     * @param user - имя пользователя
+     * @return список файлов
+     */
+    List<File> findUserFiles(User user);
 }
