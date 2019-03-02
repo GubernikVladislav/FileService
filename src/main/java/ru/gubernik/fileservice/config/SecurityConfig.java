@@ -10,8 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.sql.DataSource;
+import ru.gubernik.fileservice.config.authentification.UserAuth;
 
 /**
  * Конфигурация Spring security
@@ -21,11 +20,11 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final DataSource dataSource;
+    private final UserAuth userAuth;
 
     @Autowired
-    public SecurityConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SecurityConfig(UserAuth userAuth) {
+        this.userAuth = userAuth;
     }
 
     @Override
@@ -45,11 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .passwordEncoder(encoder())
-                .usersByUsernameQuery("select name, password, is_active from users where name=?")
-                .authoritiesByUsernameQuery("select u.name, r.role_name from users u " +
-                                            "inner join role r on u.role_id = r.id where u.name=?");
+        auth.userDetailsService(userAuth)
+                .passwordEncoder(encoder());
     }
 
     @Bean

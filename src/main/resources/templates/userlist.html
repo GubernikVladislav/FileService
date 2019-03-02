@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Список пользователей</title>
@@ -15,7 +15,7 @@
     <tr th:each = "user: ${users}">
         <td th:text="${user.userName}">userName</td>
         <td th:text="${user.email}">email</td>
-        <td th:text="${user.isActive}">isActive</td>
+        <td th:text="${user.isActive} ? 'Активен' : 'Не активен'">isActive</td>
         <td th:text="${user.role.role}">role</td>
     </tr>
 </table>

@@ -1,5 +1,6 @@
 package ru.gubernik.fileservice.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,16 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Пользователь
  */
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements Serializable {
 
     /**
      * Идентификатор
@@ -59,9 +63,12 @@ public class User {
     /**
      * Роль пользователя
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "ROLE_ID")
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<File> files;
 
     public User(){
 
@@ -117,5 +124,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<File> files) {
+        this.files = files;
     }
 }

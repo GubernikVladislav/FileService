@@ -2,7 +2,7 @@ package ru.gubernik.fileservice.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.gubernik.fileservice.model.User;
+import ru.gubernik.fileservice.model.File;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -15,12 +15,12 @@ import java.util.List;
  * {@inheritDoc}
  */
 @Service
-public class UserDaoImpl implements UserDao {
+public class FileDaoImpl implements FileDao {
 
     private final EntityManager entityManager;
 
     @Autowired
-    public UserDaoImpl(EntityManager entityManager) {
+    public FileDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
@@ -28,28 +28,23 @@ public class UserDaoImpl implements UserDao {
      * {@inheritDoc}
      */
     @Override
-    public void addUser(User user) {
-
-        if(user == null){
-            return;
-        }
-
-        entityManager.persist(user);
+    public void saveFile(File file) {
+        entityManager.persist(file);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<User> findAll() {
+    public List<File> findAll() {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-        Root<User> root = criteriaQuery.from(User.class);
+        CriteriaQuery<File> criteriaQuery = criteriaBuilder.createQuery(File.class);
+        Root<File> root = criteriaQuery.from(File.class);
 
         criteriaQuery.select(root);
 
-        TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<File> query = entityManager.createQuery(criteriaQuery);
 
         return query.getResultList();
     }
@@ -58,17 +53,16 @@ public class UserDaoImpl implements UserDao {
      * {@inheritDoc}
      */
     @Override
-    public User getUserByName(String userName) {
+    public File findByFileName(String fileName) {
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-        Root root = criteriaQuery.from(User.class);
+        CriteriaQuery<File> criteriaQuery = criteriaBuilder.createQuery(File.class);
+        Root<File> root = criteriaQuery.from(File.class);
 
-        criteriaQuery.where(criteriaBuilder.equal(root.get("userName"), userName));
+        criteriaQuery.where(criteriaBuilder.equal(root.get("fileName"), fileName));
 
-        TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+        TypedQuery<File> query = entityManager.createQuery(criteriaQuery);
 
         return query.getSingleResult();
     }
-
 }

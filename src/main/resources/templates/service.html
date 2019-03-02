@@ -4,10 +4,28 @@
     <title>File Service</title>
 </head>
 <body>
+<div>
 <a th:href="@{/userlist}">Список пользователей</a>
-Список файлов
+</div>
+    Список файлов
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти"/>
 </form>
+<div>
+    <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+        <input type="text" name="description" placeholder="Описание файла">
+        <input type="file" name="file">
+        <input type="submit" value="Загрузить">
+    </form>
+    <p th:text="${message}">Text</p>
+</div>
+<div>
+    <table>
+        <tr th:each = "file: ${files}">
+            <td th:text="${file.fileName}">fileName</td>
+            <td><a th:href="@{/download/} + ${file.fileName}">Скачать</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

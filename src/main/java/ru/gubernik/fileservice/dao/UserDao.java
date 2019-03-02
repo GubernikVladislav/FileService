@@ -20,4 +20,11 @@ public interface UserDao {
      * @return List список пользователей
      */
     List<User> findAll();
+
+    /**
+     * Получение пользователя по имени
+     * @param userName имя пользователя
+     * @return объект пользователя
+     */
+    User getUserByName(String userName);
 }

@@ -1,5 +1,6 @@
 package ru.gubernik.fileservice.controller;
 
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import ru.gubernik.fileservice.model.User;
 
@@ -12,7 +13,7 @@ public interface MainController {
      * Переход на главную страницу сервиса
      * @return - имя представления основной страницы сервиса
      */
-    String service();
+    String service(Model model);
 
     /**
      * Переход на страницу регистрации
