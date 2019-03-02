@@ -50,7 +50,7 @@ public class User {
      * Пароль
      */
     @NotEmpty(message = "Введите пароль")
-    @Column(name = "PASSWORD" , length = 50)
+    @Column(name = "PASSWORD" , length = 100)
     private String password;
 
     @Column(name = "IS_ACTIVE")

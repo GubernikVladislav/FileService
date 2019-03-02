@@ -1,6 +1,8 @@
 package ru.gubernik.fileservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.gubernik.fileservice.dao.RoleDao;
@@ -17,11 +19,13 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final RoleDao roleDao;
     private Role userRole;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao, PasswordEncoder encoder) {
         this.userDao = userDao;
         this.roleDao = roleDao;
+        this.encoder = encoder;
     }
 
     /**
@@ -37,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
         user.setRole(userRole);
         user.setIsActive(true);
+        user.setPassword(encoder.encode(user.getPassword()));
 
         userDao.addUser(user);
     }
