@@ -53,6 +53,9 @@ public class User {
     @Column(name = "PASSWORD" , length = 50)
     private String password;
 
+    @Column(name = "IS_ACTIVE")
+    private Boolean isActive;
+
     /**
      * Роль пользователя
      */
@@ -98,6 +101,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean active) {
+        isActive = active;
     }
 
     public Role getRole() {

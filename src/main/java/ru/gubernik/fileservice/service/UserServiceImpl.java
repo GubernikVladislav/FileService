@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
         }
 
         user.setRole(userRole);
+        user.setIsActive(true);
 
         userDao.addUser(user);
     }
