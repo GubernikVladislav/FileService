@@ -26,6 +26,7 @@ public class MainControllerImpl implements MainController {
     /**
      * {@inheritDoc}
      */
+    @Override
     @GetMapping("/service")
     public String service(){
 
@@ -35,6 +36,7 @@ public class MainControllerImpl implements MainController {
     /**
      * {@inheritDoc}
      */
+    @Override
     @GetMapping("/registration")
     public String registration(User user){
 
@@ -44,6 +46,7 @@ public class MainControllerImpl implements MainController {
     /**
      * {@inheritDoc}
      */
+    @Override
     @PostMapping("/registration")
     public String addUser(@Valid User user, BindingResult result){
 

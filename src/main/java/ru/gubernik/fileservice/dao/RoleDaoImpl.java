@@ -29,6 +29,10 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRole(String roleName) {
 
+        if(roleName == null || roleName.isEmpty()){
+            throw new RuntimeException("Role name cannot be null or empty");
+        }
+
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Role> criteriaQuery = criteriaBuilder.createQuery(Role.class);
         Root root = criteriaQuery.from(Role.class);
