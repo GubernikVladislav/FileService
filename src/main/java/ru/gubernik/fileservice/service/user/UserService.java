@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.service;
+package ru.gubernik.fileservice.service.user;
 
 import ru.gubernik.fileservice.model.User;
 
@@ -17,7 +17,7 @@ public interface UserService {
 
     /**
      * Получение списка пользователей
-     * @return
+     * @return список пользователей
      */
     List<User> userList();
 }

@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.dao;
+package ru.gubernik.fileservice.dao.role;
 
 import ru.gubernik.fileservice.model.Role;
 

@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.controller;
+package ru.gubernik.fileservice.controller.file;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;

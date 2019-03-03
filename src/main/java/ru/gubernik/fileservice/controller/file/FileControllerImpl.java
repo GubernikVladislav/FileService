@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.controller;
+package ru.gubernik.fileservice.controller.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.gubernik.fileservice.config.authentification.UserPrincipal;
 import ru.gubernik.fileservice.model.File;
-import ru.gubernik.fileservice.service.FileService;
+import ru.gubernik.fileservice.service.file.FileService;
 
 /**
  * {@inheritDoc}
@@ -63,6 +63,10 @@ public class FileControllerImpl implements FileController{
     @GetMapping("/download/{fileName}")
     public ResponseEntity<ByteArrayResource> download(@PathVariable("fileName") String fileName){
 
+        if(fileName == null || fileName.isEmpty()){
+            throw new RuntimeException("Error downloading: filename cannot be null or empty");
+        }
+
         File file = fileService.getByFileName(fileName);
 
         byte[] data = file.getFileData();
@@ -77,4 +81,5 @@ public class FileControllerImpl implements FileController{
                 .contentLength(data.length) //
                 .body(resource);
     }
+
 }

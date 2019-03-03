@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.config;
+package ru.gubernik.fileservice.config.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

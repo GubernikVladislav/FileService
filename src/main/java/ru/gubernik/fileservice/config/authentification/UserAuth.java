@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.gubernik.fileservice.dao.UserDao;
+import ru.gubernik.fileservice.dao.user.UserDao;
 import ru.gubernik.fileservice.model.User;
 
 @Service

@@ -1,11 +1,11 @@
-package ru.gubernik.fileservice.service;
+package ru.gubernik.fileservice.service.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.gubernik.fileservice.dao.RoleDao;
-import ru.gubernik.fileservice.dao.UserDao;
+import ru.gubernik.fileservice.dao.role.RoleDao;
+import ru.gubernik.fileservice.dao.user.UserDao;
 import ru.gubernik.fileservice.model.Role;
 import ru.gubernik.fileservice.model.User;
 
@@ -36,8 +36,12 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void addUser(User user) {
 
+        if(user == null){
+            throw new RuntimeException("USer service error: user cannot be null");
+        }
+
         if(userRole == null) {
-            getRole();
+            saveRoleUser();
         }
 
         user.setRole(userRole);
@@ -55,10 +59,7 @@ public class UserServiceImpl implements UserService {
         return userDao.findAll();
     }
 
-    /*
-     * Сохранение объекта Role с именем USER
-     */
-    private void getRole() {
+    private void saveRoleUser() {
         userRole = roleDao.getRole("USER");
     }
 }

@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.dao;
+package ru.gubernik.fileservice.dao.file;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -56,6 +57,10 @@ public class FileDaoImpl implements FileDao {
     @Override
     public File findByFileName(String fileName) {
 
+        if(fileName == null || fileName.isEmpty()){
+            throw new RuntimeException("FileDao error: file name cannot be null or empty");
+        }
+
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<File> criteriaQuery = criteriaBuilder.createQuery(File.class);
         Root<File> root = criteriaQuery.from(File.class);
@@ -67,8 +72,15 @@ public class FileDaoImpl implements FileDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<File> findUserFiles(User user) {
+
+        if(user == null){
+            return Collections.emptyList();
+        }
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<File> criteriaQuery = criteriaBuilder.createQuery(File.class);

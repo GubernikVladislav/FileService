@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.gubernik.fileservice.config.authentification.UserPrincipal;
 import ru.gubernik.fileservice.model.User;
-import ru.gubernik.fileservice.service.FileService;
-import ru.gubernik.fileservice.service.UserService;
+import ru.gubernik.fileservice.service.file.FileService;
+import ru.gubernik.fileservice.service.user.UserService;
 
 import javax.validation.Valid;
 
@@ -40,6 +40,10 @@ public class MainControllerImpl implements MainController {
         return "redirect:/service/" + user.getUsername();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     @GetMapping("/service/{pageOwner}")
     public String userPage(@AuthenticationPrincipal UserPrincipal userPrincipal,
                            @PathVariable("pageOwner") String pageOwner, Model model){
@@ -80,5 +84,25 @@ public class MainControllerImpl implements MainController {
         userService.addUser(user);
 
         return "redirect:/login";
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @GetMapping("/userlist")
+    public String userList(@AuthenticationPrincipal UserPrincipal userPrincipal, Model model){
+
+        if(model == null){
+            throw new RuntimeException("Main controller model error");
+        }
+
+        if(userPrincipal == null || userPrincipal.getUser() == null){
+            throw new RuntimeException("Authentication error: null user principal");
+        }
+
+        model.addAttribute("role", userPrincipal.getUser().getRole().getRole());
+        model.addAttribute("users",userService.userList());
+
+        return "userlist";
     }
 }

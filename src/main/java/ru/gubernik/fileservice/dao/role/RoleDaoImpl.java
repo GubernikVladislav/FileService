@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.dao;
+package ru.gubernik.fileservice.dao.role;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

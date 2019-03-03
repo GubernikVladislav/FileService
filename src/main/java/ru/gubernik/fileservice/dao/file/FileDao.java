@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.dao;
+package ru.gubernik.fileservice.dao.file;
 
 import ru.gubernik.fileservice.model.File;
 import ru.gubernik.fileservice.model.User;

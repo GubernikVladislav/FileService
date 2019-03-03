@@ -17,6 +17,14 @@ public interface MainController {
     String service(UserPrincipal user, Model model);
 
     /**
+     * Переход на страницу пользователя
+     * @param userPrincipal - активный пользователь
+     * @param pageOwner - имя владельца страницы
+     * @param model - модель
+     * @return возвращает представление страницы пользователя pageOwner
+     */
+    String userPage( UserPrincipal userPrincipal, String pageOwner, Model model);
+    /**
      * Переход на страницу регистрации
      * @param user - пустой объект пользователя
      * @return - имя представления регистрации
@@ -31,4 +39,10 @@ public interface MainController {
      */
     String addUser(User user, BindingResult result);
 
+
+    /**
+     * Переход на страницу со списком пользователей
+     * @return - имя представления списка пользователей
+     */
+    String userList(UserPrincipal userPrincipal, Model model);
 }

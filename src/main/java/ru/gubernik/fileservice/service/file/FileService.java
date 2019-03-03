@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.service;
+package ru.gubernik.fileservice.service.file;
 
 import org.springframework.web.multipart.MultipartFile;
 import ru.gubernik.fileservice.model.File;

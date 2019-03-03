@@ -1,4 +1,4 @@
-package ru.gubernik.fileservice.dao;
+package ru.gubernik.fileservice.dao.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +59,10 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public User getUserByName(String userName) {
+
+        if(userName == null || userName.isEmpty()){
+            throw new RuntimeException("User dao error: user name cannot be null or empty");
+        }
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);

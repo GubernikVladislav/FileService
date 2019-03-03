@@ -4,8 +4,9 @@
     <title>File Service</title>
 </head>
 <body>
-<div th:if="${role == 'ADMIN'}">
 <a th:href="@{/userlist}">Список пользователей</a>
+<div th:if="${role == 'ANALYST'}">
+    <a th:href="@{/statistic}">Статистика</a>
 </div>
     Список файлов
 <form th:action="@{/logout}" method="post">
