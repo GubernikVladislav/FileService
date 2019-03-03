@@ -75,8 +75,6 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<File> files;
 
-    private Integer fileCount;
-
     public User(){
 
     }
@@ -141,13 +139,8 @@ public class User implements Serializable {
         this.files = files;
     }
 
-    public Integer getFileCount() {
-        fileCount = getFiles().size();
-        return fileCount;
-    }
-
-    public void setFileCount(Integer fileCount) {
-        this.fileCount = fileCount;
+    public Integer getFilesCount(){
+        return getFiles().size();
     }
 
     public String getCode() {

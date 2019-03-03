@@ -41,7 +41,7 @@
         </tr>
         <tr th:each="user: ${users}">
             <td th:text="${user.userName}"></td>
-            <td th:text="${user.fileCount}"></td>
+            <td th:text="${user.filesCount}"></td>
             <td><a th:href="@{/service/} + ${user.userName}">Просмотр</a> </td>
             <td><a th:href="@{/edit/} + ${user.userName}">Редактировать</a> </td>
         </tr>
