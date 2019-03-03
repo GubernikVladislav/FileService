@@ -20,4 +20,10 @@ public interface UserService {
      * @return список пользователей
      */
     List<User> userList();
+
+    /**
+     * Активация пользователя по коду из письма
+     * @param code активационный код
+     */
+    void activateUser(String code);
 }

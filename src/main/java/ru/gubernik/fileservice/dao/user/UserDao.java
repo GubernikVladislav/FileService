@@ -27,4 +27,17 @@ public interface UserDao {
      * @return объект пользователя
      */
     User getUserByName(String userName);
+
+    /**
+     * Получение пользователя по коду активации
+     * @param code - активационный код
+     * @return пользователь
+     */
+    User getUserByActivationCode(String code);
+
+    /**
+     * Обновление пользователя
+     * @param user пользователь
+     */
+    void updateUser(User user);
 }

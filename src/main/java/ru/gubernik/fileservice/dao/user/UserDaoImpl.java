@@ -75,4 +75,38 @@ public class UserDaoImpl implements UserDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User getUserByActivationCode(String code) {
+
+        if(code == null || code.isEmpty()){
+            throw new RuntimeException("Activation code cannot be null or empty");
+        }
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root root = criteriaQuery.from(User.class);
+
+        criteriaQuery.where(criteriaBuilder.equal(root.get("code"), code));
+
+        TypedQuery<User> query = entityManager.createQuery(criteriaQuery);
+
+        return query.getSingleResult();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void updateUser(User user) {
+
+        if(user == null){
+            return;
+        }
+
+        entityManager.merge(user);
+    }
+
 }

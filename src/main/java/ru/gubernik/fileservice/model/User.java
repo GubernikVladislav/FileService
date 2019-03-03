@@ -1,5 +1,7 @@
 package ru.gubernik.fileservice.model;
 
+import org.springframework.stereotype.Controller;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,6 +61,9 @@ public class User implements Serializable {
 
     @Column(name = "IS_ACTIVE")
     private Boolean isActive;
+
+    @Column(name = "code", length = 50)
+    private String code;
 
     /**
      * Роль пользователя
@@ -143,5 +148,13 @@ public class User implements Serializable {
 
     public void setFileCount(Integer fileCount) {
         this.fileCount = fileCount;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

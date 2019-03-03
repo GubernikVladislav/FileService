@@ -4,16 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import ru.gubernik.fileservice.config.authentification.UserPrincipal;
-import ru.gubernik.fileservice.model.User;
 import ru.gubernik.fileservice.service.file.FileService;
 import ru.gubernik.fileservice.service.user.UserService;
-
-import javax.validation.Valid;
 
 /**
  * {@inheritDoc}
@@ -56,35 +51,6 @@ public class MainControllerImpl implements MainController {
         return "service";
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @GetMapping("/registration")
-    public String registration(User user){
-
-        return "registration";
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @PostMapping("/registration")
-    public String addUser(@Valid User user, BindingResult result){
-
-        if (user == null){
-            return "login";
-        }
-
-        if(result.hasErrors()){
-            return "registration";
-        }
-
-        userService.addUser(user);
-
-        return "redirect:/login";
-    }
     /**
      * {@inheritDoc}
      */
